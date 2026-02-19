@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetEmailSent from "./pages/ResetEmailSent";
 import NotFound from "./pages/NotFound";
+import AdminDashboard from "./admin/AdminDashboard";
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-sent" element={<ResetEmailSent />} />
+
+        {/* Admin Routes */}
+        <Route path="/admin" element={<AdminDashboard />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
