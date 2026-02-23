@@ -13,6 +13,8 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetEmailSent from "./pages/ResetEmailSent";
 import NotFound from "./pages/NotFound";
 import AdminDashboard from "./admin/AdminDashboard";
+import ProductManagement from "./admin/ProductManagement";
+import EditProduct from "./admin/EditProduct";
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
 
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/products" element={<ProductManagement />} />
+        <Route path="/admin/products/edit/:id" element={<EditProduct />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
