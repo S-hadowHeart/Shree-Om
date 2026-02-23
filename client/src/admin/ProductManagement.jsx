@@ -152,9 +152,11 @@ export default function ProductManagement() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <button className="p-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors">
-                        <Edit className="h-4 w-4" />
-                      </button>
+                      <Link to={`/admin/products/edit/${product.id}`}>
+                        <button className="p-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors">
+                          <Edit className="h-4 w-4" />
+                        </button>
+                      </Link>
                       <button className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded transition-colors">
                         <Trash2 className="h-4 w-4" />
                       </button>
