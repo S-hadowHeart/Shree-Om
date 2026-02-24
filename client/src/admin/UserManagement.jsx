@@ -86,10 +86,13 @@ export default function UserManagement() {
             <h1 className="text-3xl font-bold text-gray-900">User Management</h1>
             <p className="text-sm text-gray-500 mt-1">Manage customer accounts and access levels.</p>
           </div>
-          <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 font-medium transition-colors">
+          <Link 
+            to="/admin/users/add"
+            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 font-medium transition-colors"
+          >
             <Plus className="h-4 w-4" />
             Add User
-          </button>
+          </Link>
         </div>
 
         {/* Search */}
@@ -171,9 +174,12 @@ export default function UserManagement() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <button className="p-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors">
+                      <Link 
+                        to={`/admin/users/edit/${user.id}`}
+                        className="p-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
+                      >
                         <Edit className="h-4 w-4" />
-                      </button>
+                      </Link>
                       <button className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded transition-colors">
                         <Trash2 className="h-4 w-4" />
                       </button>
