@@ -20,6 +20,7 @@ import AddProduct from "./admin/AddProduct";
 import AddUser from "./admin/AddUser";
 import EditUser from "./admin/EditUser";
 import OrderManagement from "./admin/OrderManagement";
+import Dashboard from "./User/Dashboard";
 
 function App() {
   return (
@@ -47,6 +48,9 @@ function App() {
         <Route path="/admin/users/add" element={<AddUser />} />
         <Route path="/admin/users/edit/:id" element={<EditUser />} />
         <Route path="/admin/orders" element={<OrderManagement />} />
+
+        {/* User Routes */}
+        <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
