@@ -1,33 +1,32 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ForgotPassword() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const validateEmail = () => {
-    if (!email) {
-      return "Email is required";
-    }
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      return "Enter valid email address";
-    }
-    return "";
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
-    const validationError = validateEmail();
+    if (!email) return setError("Email is required");
+    if (!/\S+@\S+\.\S+/.test(email)) return setError("Enter valid email address");
 
-    if (validationError) {
-      setError(validationError);
-      setSuccess("");
-    } else {
-      setError("");
-      setSuccess("Reset link sent to your email!");
-      console.log("Reset link for:", email);
+    setLoading(true);
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      await res.json();
+      navigate("/reset-sent", { state: { email } });
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,7 +34,7 @@ function ForgotPassword() {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12">
       <div className="w-full max-w-md bg-white p-6 rounded shadow-sm">
         <h2 className="text-xl font-semibold">Reset Your Password</h2>
-        <p className="text-sm text-gray-600 mt-1">Enter your email address and we'll send you a reset link</p>
+        <p className="text-sm text-gray-600 mt-1">Enter your email and we'll send you a reset link</p>
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-3">
           <div>
@@ -48,10 +47,10 @@ function ForgotPassword() {
               onChange={(e) => setEmail(e.target.value)}
             />
             {error && <p className="text-sm text-red-500">{error}</p>}
-            {success && <p className="text-sm text-green-600">{success}</p>}
           </div>
-
-          <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded">Send Reset Link</button>
+          <button type="submit" disabled={loading} className="w-full bg-orange-500 text-white py-2 rounded disabled:opacity-60">
+            {loading ? "Sending..." : "Send Reset Link"}
+          </button>
         </form>
 
         <p className="text-sm mt-4">
