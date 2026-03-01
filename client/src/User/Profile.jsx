@@ -7,10 +7,6 @@ const Profile = () => {
     ? JSON.parse(stored)
     : { name: "", email: "", phone: "" };
 
-  const [name, setName] = useState(user.name || "");
-  const [email] = useState(user.email || "");
-  const [phone, setPhone] = useState(user.phone || "");
-  const [message, setMessage] = useState("");
 
   const initial = (user.name && user.name[0]) ? user.name[0].toUpperCase() : "U";
 
