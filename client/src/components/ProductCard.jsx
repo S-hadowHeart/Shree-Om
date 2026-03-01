@@ -1,10 +1,22 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function ProductCard(props) {
   const { product, name, price, oldPrice, rating, image } = props;
   const p = product || { name, price, oldPrice, rating, image };
+  const [added, setAdded] = useState(false);
 
   const slug = p.id ?? p.name?.toLowerCase().replace(/\s+/g, "-");
+
+  const addToCart = () => {
+    if (typeof window === "undefined") return;
+    const stored = localStorage.getItem("cart");
+    const cart = stored ? JSON.parse(stored) : [];
+    cart.push({ ...p, qty: 1 });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-sm p-4 flex flex-col">
@@ -35,9 +47,9 @@ function ProductCard(props) {
         </div>
       </div>
 
-      <button className="mt-4 bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 flex items-center justify-center gap-2">
+      <button onClick={addToCart} className="mt-4 bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 flex items-center justify-center gap-2">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6h15l-1.5 9h-12z" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="10" cy="20" r="1" fill="#fff"/><circle cx="18" cy="20" r="1" fill="#fff"/></svg>
-        Add to Cart
+        {added ? "Added!" : "Add to Cart"}
       </button>
     </div>
   );

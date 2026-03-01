@@ -7,6 +7,12 @@ const Dashboard = () => {
 
   const initial = (user.name && user.name[0]) ? user.name[0].toUpperCase() : 'U'
 
+  // calculate wishlist count from localStorage
+  const wlCount =
+    typeof window !== 'undefined'
+      ? JSON.parse(localStorage.getItem('wishlist') || "[]").length
+      : 0;
+
   return (
     <div className="px-6 py-8 max-w-7xl mx-auto">
       <h2 className="text-2xl font-semibold mb-6">My Dashboard</h2>
@@ -51,7 +57,7 @@ const Dashboard = () => {
               <div className="text-sm text-gray-500">Pending Orders</div>
             </div>
             <div className="bg-white rounded-lg border p-4 text-center">
-              <div className="text-3xl font-bold text-orange-500">0</div>
+              <div className="text-3xl font-bold text-orange-500">{wlCount}</div>
               <div className="text-sm text-gray-500">Wishlist Items</div>
             </div>
             <div className="bg-white rounded-lg border p-4 text-center">

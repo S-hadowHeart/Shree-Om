@@ -63,7 +63,8 @@ function Header() {
             </nav>
 
             <div className="flex items-center gap-3">
-              <button
+              <Link
+                to="/wishlist"
                 aria-label="Wishlist"
                 className="p-2 rounded-md hover:text-orange-500"
               >
@@ -82,8 +83,9 @@ function Header() {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </button>
-              <button
+              </Link>
+              <Link
+                to="/cart"
                 aria-label="Cart"
                 className="p-2 rounded-md hover:text-orange-500"
               >
@@ -104,7 +106,7 @@ function Header() {
                   <circle cx="10" cy="20" r="1" fill="#374151" />
                   <circle cx="18" cy="20" r="1" fill="#374151" />
                 </svg>
-              </button>
+              </Link>
               <Link
                 to="/login"
                 aria-label="Account"

@@ -10,6 +10,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./User/Reset-password";
 import ResetEmailSent from "./pages/ResetEmailSent";
 import NotFound from "./pages/NotFound";
 import AdminDashboard from "./admin/AdminDashboard";
@@ -21,6 +22,12 @@ import AddUser from "./admin/AddUser";
 import EditUser from "./admin/EditUser";
 import OrderManagement from "./admin/OrderManagement";
 import Dashboard from "./User/Dashboard";
+import Wishlist from "./User/wishlist";
+import MyOrders from "./User/order";
+import Profile from "./User/Profile";
+import Cart from "./User/shopping-cart";
+import Payment from "./User/Payment";
+import PaymentSuccess from "./User/Payment-success";
 
 function App() {
   return (
@@ -37,6 +44,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/reset-sent" element={<ResetEmailSent />} />
 
         {/* Admin Routes */}
@@ -51,6 +59,12 @@ function App() {
 
         {/* User Routes */}
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/my-orders" element={<MyOrders />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

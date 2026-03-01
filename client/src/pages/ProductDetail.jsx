@@ -35,6 +35,7 @@ function ProductDetail() {
   );
   const [qty, setQty] = useState(1);
   const [tab, setTab] = useState("description");
+  const [added, setAdded] = useState(false);
 
   function dec() {
     setQty((q) => Math.max(1, q - 1));
@@ -43,6 +44,16 @@ function ProductDetail() {
   function inc() {
     setQty((q) => q + 1);
   }
+
+  const addToCart = () => {
+    if (typeof window === "undefined") return;
+    const stored = localStorage.getItem("cart");
+    const cart = stored ? JSON.parse(stored) : [];
+    cart.push({ ...product, qty });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
 
   const related = Array.from({ length: 3 }).map((_, i) => ({
     id: `r-${i + 1}`,
@@ -168,11 +179,17 @@ function ProductDetail() {
                       </button>
                     </div>
 
-                    <button className="ml-4 bg-orange-500 text-white px-6 py-3 rounded flex items-center gap-3">
-                      Add to Cart
+                    <button onClick={addToCart} className="ml-4 bg-orange-500 text-white px-6 py-3 rounded flex items-center gap-3">
+                      {added ? "✓ Added to Cart!" : "Add to Cart"}
                     </button>
 
-                    <button className="ml-2 border rounded p-3">❤</button>
+                    <button
+                      className="ml-2 border rounded p-3"
+                      onClick={() => {
+                        // navigate to wishlist page when heart clicked
+                        window.location.href = '/wishlist';
+                      }}
+                    >❤</button>
                   </div>
                 </div>
               </div>
